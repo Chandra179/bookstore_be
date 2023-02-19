@@ -21,3 +21,26 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# Framework cache
+.cache
+.project
+.DS_Store
+.settings
+.classpath
+.factorypath
+
+# Editor garbage
+.idea/
+.vscode/
+.settings/
+.classpath
+.vscode/
+.jpb/
+
+# Compiled Code
+target/
+**/*.class
+
+# Local Environment
+.env
