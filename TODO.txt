@@ -1,0 +1,10 @@
+SECURITY JWT (EMAIL, PW) accesstoken 7 days until refresh token implemented
+Best seller books
+Best seller books by Genre
+books/product tag
+    - new, best seller, discount, no need to store it in database
+    - we determine the tag by checking like upload date, order count, etc.
+search
+    - book title
+    - genre & book
+inventory

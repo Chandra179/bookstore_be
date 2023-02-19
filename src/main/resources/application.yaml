@@ -1,0 +1,30 @@
+springdoc:
+  version: 2.0
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    driverClassName: org.postgresql.Driver
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  flyway:
+    validateOnMigrate: false
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
+
+  pattern:
+    console: '%d{dd-MM-yyyy HH:mm:ss.SSS} [%-3level] [%-10thread] [%C{0}@%L]: %msg%n'
+
+server:
+  error:
+    include-message: always

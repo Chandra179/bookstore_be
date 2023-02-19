@@ -22,25 +22,38 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-# Framework cache
-.cache
-.project
-.DS_Store
-.settings
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
 .classpath
 .factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
-# Editor garbage
-.idea/
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
 .vscode/
-.settings/
-.classpath
-.vscode/
-.jpb/
 
-# Compiled Code
-target/
-**/*.class
-
-# Local Environment
 .env
