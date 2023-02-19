@@ -2,6 +2,7 @@ package com.alexandria.books.book;
 
 import com.alexandria.books.book.author.Author;
 import com.alexandria.books.book.genre.Genre;
+import com.alexandria.books.inventory.Inventory;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -10,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -54,4 +56,9 @@ public class Book implements Serializable {
     joinColumns = @JoinColumn(name = "book_id"),
     inverseJoinColumns = @JoinColumn(name = "author_id"))
   Set<Author> authors;
+
+  @OneToOne
+  @JoinColumn(name = "inventory_id")
+  private Inventory inventory;
+
 }
