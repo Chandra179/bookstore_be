@@ -1,4 +1,4 @@
-package com.alexandria.books.inventory;
+package com.alexandria.books.pricing;
 
 import com.alexandria.books.book.Book;
 import jakarta.persistence.Column;
@@ -16,17 +16,17 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
-@Table(name = "inventory")
+@Table(name = "pricing")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Builder
 @Setter
-public class Inventory implements Serializable {
+public class Pricing implements Serializable {
 
   @Serial
   private static final long serialVersionUID = 1;
@@ -36,7 +36,7 @@ public class Inventory implements Serializable {
   private UUID bookId;
 
   @Column
-  private BigInteger qty;
+  private BigDecimal price;
 
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "book_id", referencedColumnName = "id")

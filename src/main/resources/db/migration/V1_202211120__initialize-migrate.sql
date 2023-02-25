@@ -1,8 +1,7 @@
 CREATE TABLE genre
 (
-    id         SERIAL NOT NULL,
-    name       VARCHAR(255),
-    CONSTRAINT pk_genre PRIMARY KEY (id)
+    id         SERIAL PRIMARY KEY,
+    name       VARCHAR(255) UNIQUE
 );
 INSERT INTO genre (name) VALUES ('BIOGRAPHY');
 INSERT INTO genre (name) VALUES ('FICTION');
@@ -10,18 +9,17 @@ INSERT INTO genre (name) VALUES ('SELF_HELP');
 
 CREATE TABLE book
 (
-    id          UUID NOT NULL,
-    title       VARCHAR(255),
-    CONSTRAINT pk_book PRIMARY KEY (id)
+    id          UUID PRIMARY KEY,
+    title       VARCHAR(255)
 );
 CREATE INDEX IF NOT EXISTS idx_book_title ON book (title);
 
 CREATE TABLE author
 (
-    id          UUID NOT NULL,
+    id          UUID PRIMARY KEY,
     first_name  VARCHAR(255),
     last_name   VARCHAR(255),
-    CONSTRAINT pk_author PRIMARY KEY (id)
+    UNIQUE (first_name, last_name)
 );
 CREATE INDEX IF NOT EXISTS idx_author_id ON author (id);
 CREATE INDEX IF NOT EXISTS idx_author_firstname_lastname ON author (first_name, last_name);
@@ -40,3 +38,14 @@ CREATE TABLE book_genre
     PRIMARY KEY (book_id, genre_id)
 );
 
+CREATE TABLE inventory
+(
+    book_id     UUID NOT NULL REFERENCES book (id),
+    qty         BIGINT NOT NULL
+);
+
+CREATE TABLE pricing
+(
+    book_id     UUID NOT NULL REFERENCES book (id),
+    price       NUMERIC(15, 2) NOT NULL
+);

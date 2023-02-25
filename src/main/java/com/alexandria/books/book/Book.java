@@ -3,6 +3,8 @@ package com.alexandria.books.book;
 import com.alexandria.books.book.author.Author;
 import com.alexandria.books.book.genre.Genre;
 import com.alexandria.books.inventory.Inventory;
+import com.alexandria.books.pricing.Pricing;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -57,8 +59,10 @@ public class Book implements Serializable {
     inverseJoinColumns = @JoinColumn(name = "author_id"))
   Set<Author> authors;
 
-  @OneToOne
-  @JoinColumn(name = "inventory_id")
+  @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
   private Inventory inventory;
+
+  @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
+  private Pricing pricing;
 
 }
