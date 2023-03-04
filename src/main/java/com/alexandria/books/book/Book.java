@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,8 +22,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
 
@@ -33,10 +32,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @Setter
-public class Book implements Serializable {
-
-  @Serial
-  private static final long serialVersionUID = 1;
+public class Book {
 
   @Id
   @GeneratedValue
@@ -60,9 +56,11 @@ public class Book implements Serializable {
   Set<Author> authors;
 
   @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
+  @PrimaryKeyJoinColumn
   private Inventory inventory;
 
   @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
+  @PrimaryKeyJoinColumn
   private Pricing pricing;
 
 }

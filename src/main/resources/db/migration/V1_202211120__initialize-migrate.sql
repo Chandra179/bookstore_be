@@ -18,8 +18,7 @@ CREATE TABLE author
 (
     id          UUID PRIMARY KEY,
     first_name  VARCHAR(255),
-    last_name   VARCHAR(255),
-    UNIQUE (first_name, last_name)
+    last_name   VARCHAR(255)
 );
 CREATE INDEX IF NOT EXISTS idx_author_id ON author (id);
 CREATE INDEX IF NOT EXISTS idx_author_firstname_lastname ON author (first_name, last_name);
