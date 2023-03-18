@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,12 +28,10 @@ public class BookController {
   @Operation(description = "Get all books, zero based index")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Success get books"),
-      @ApiResponse(responseCode = "404", description = "Book not found",
-        content = @Content(schema = @Schema(implementation = ResponseStatusException.class)))
-    }
-  )
+      @ApiResponse(responseCode = "404", description = "Book not found")
+  })
   @GetMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE})
-  public Page<Book> getAllBooks(
+  public List<BookPaginationResponse> getAllBooks(
     @RequestParam(defaultValue = "0") int page,
     @RequestParam(defaultValue = "5") int size
   ) throws ResponseStatusException {
@@ -42,22 +39,17 @@ public class BookController {
   }
 
   @Operation(description = "Find book by title")
-  @ApiResponses(
-    value = {
+  @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Success get book"),
       @ApiResponse(responseCode = "404", description = "Book not found",
         content = @Content(schema = @Schema(implementation = ResponseStatusException.class)))
-    }
-  )
-  @GetMapping(
-    value = "",
-    produces = {MediaType.APPLICATION_JSON_VALUE}
-  )
+  })
+  @GetMapping(value = "")
   public List<Book> findBooksByQueryParam(
     @RequestParam(value = "id", defaultValue = "") String id,
     @RequestParam(value = "book_title", defaultValue = "") String title,
     @RequestParam(value = "genre", defaultValue = "") Genre.GENRE genre
-  ) throws ResponseStatusException {
+  ) {
     return bookService.findBooksByQueryParam(id, title, genre);
   }
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class GenreServiceImpl implements GerneService {
+public class GenreServiceImpl implements GenreService {
 
   GenreRepository genreRepository;
 
@@ -22,7 +22,7 @@ public class GenreServiceImpl implements GerneService {
     Sort sort = Sort.by(Sort.Direction.ASC, "name");
     var genres = genreRepository.findAll(sort).stream().toList();
     if (genres.isEmpty()) {
-      throw new NotFoundException("Book not found");
+      throw new NotFoundException("Genre not found");
     }
     return genreRepository.findAll(sort).stream().toList();
   }

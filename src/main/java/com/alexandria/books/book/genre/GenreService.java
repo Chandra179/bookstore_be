@@ -2,7 +2,7 @@ package com.alexandria.books.book.genre;
 
 import java.util.List;
 
-public interface GerneService {
+public interface GenreService {
 
   List<Genre> getAllGenre();
 }

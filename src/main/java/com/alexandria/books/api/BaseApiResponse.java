@@ -2,16 +2,16 @@ package com.alexandria.books.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BaseResponse<T> {
+public class BaseApiResponse<T> {
 
-  public static <T> BaseResponse<T> build(T data){
-    return new BaseResponse<>(data);
+  public static <T> BaseApiResponse<T> build(T data){
+    return new BaseApiResponse<>(data);
   }
 
   @JsonProperty("data")
   private T data;
 
-  public BaseResponse(T data) {
+  public BaseApiResponse(T data) {
     this.data = data;
   }
 
