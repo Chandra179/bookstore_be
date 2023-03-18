@@ -6,11 +6,19 @@ import lombok.Builder;
 
 @Builder
 @AllArgsConstructor
-public class BookPaginationResponse {
+public class BookCustomResponse {
 
   @JsonProperty("title")
   String title;
 
   @JsonProperty("author")
   String author;
+
+  @JsonProperty("genres")
+  String genres;
+
+  public BookCustomResponse(String title, String author) {
+    this.title = title;
+    this.author = author;
+  }
 }

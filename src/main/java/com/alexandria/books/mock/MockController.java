@@ -3,7 +3,7 @@ package com.alexandria.books.mock;
 import com.alexandria.books.api.BaseApiResponse;
 import com.alexandria.books.book.Book;
 import com.alexandria.books.book.BookRepository;
-import com.alexandria.books.book.BookResponse;
+import com.alexandria.books.book.BookCompleteResponse;
 import com.alexandria.books.book.author.Author;
 import com.alexandria.books.book.author.AuthorRepository;
 import com.alexandria.books.book.genre.Genre;
@@ -42,7 +42,7 @@ public class MockController {
   @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success get genre")})
   @GetMapping(value = "")
   @Transactional(rollbackOn = Exception.class)
-  public BaseApiResponse<BookResponse> createBookMockData() {
+  public BaseApiResponse<BookCompleteResponse> createBookMockData() {
     var book = Book.builder().title("Advanture of kora").authors(new HashSet<>())
       .genres(new HashSet<>()).build();
     var author1 = Author.builder().firstName("stanley").lastName("hudson").build();
@@ -71,7 +71,7 @@ public class MockController {
     bookRepository.save(book);
 
     return BaseApiResponse.build(
-      BookResponse.builder().title(book.getTitle()).authors(authorList).genres(genres)
+      BookCompleteResponse.builder().title(book.getTitle()).authors(authorList).genres(genres)
         .qty(book.getInventory().getQty()).price(book.getPricing().getPrice()).build()
     );
   }

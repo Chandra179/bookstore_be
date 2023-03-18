@@ -2,8 +2,6 @@ package com.alexandria.books.book;
 
 import com.alexandria.books.book.genre.Genre;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -31,18 +28,17 @@ public class BookController {
       @ApiResponse(responseCode = "404", description = "Book not found")
   })
   @GetMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE})
-  public List<BookPaginationResponse> getAllBooks(
+  public List<BookCustomResponse> getAllBooks(
     @RequestParam(defaultValue = "0") int page,
     @RequestParam(defaultValue = "5") int size
-  ) throws ResponseStatusException {
+  ) {
     return bookService.findAllBooks(page, size);
   }
 
   @Operation(description = "Find book by title")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Success get book"),
-      @ApiResponse(responseCode = "404", description = "Book not found",
-        content = @Content(schema = @Schema(implementation = ResponseStatusException.class)))
+      @ApiResponse(responseCode = "404", description = "Book not found")
   })
   @GetMapping(value = "")
   public List<Book> findBooksByQueryParam(

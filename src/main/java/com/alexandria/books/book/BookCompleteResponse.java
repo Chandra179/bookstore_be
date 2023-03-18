@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Builder
-public class BookResponse {
+public class BookCompleteResponse {
 
   @JsonProperty("title")
   String title;
@@ -27,6 +27,7 @@ public class BookResponse {
 
   @JsonProperty("qty")
   BigInteger qty;
+
   @JsonProperty("price")
   BigDecimal price;
 }

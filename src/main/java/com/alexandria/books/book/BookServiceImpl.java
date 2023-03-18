@@ -24,7 +24,7 @@ public class BookServiceImpl implements BookService {
   }
 
   @Override
-  public List<BookPaginationResponse> findAllBooks(int page, int size) {
+  public List<BookCustomResponse> findAllBooks(int page, int size) {
     var bookList = bookRepository.findAllWithPagination(PageRequest.of(page, size));
     if (bookList.isEmpty()) throw new NotFoundException("Book not found");
     return bookList;
@@ -39,6 +39,7 @@ public class BookServiceImpl implements BookService {
     }
 
     if (!title.isEmpty()) {
+      System.out.println(title);
       return bookRepository.findByTitleContaining(title);
     }
 

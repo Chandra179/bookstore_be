@@ -16,7 +16,7 @@ public interface BookRepository extends JpaRepository<Book, UUID>, CrudRepositor
   List<Book> findByGenresAndTitleContaining(Genre genre, String title);
   List<Book> findByTitleContaining(String title);
 
-  @Query("SELECT new com.alexandria.books.book.BookPaginationResponse" +
+  @Query("SELECT new com.alexandria.books.book.BookCustomResponse" +
          "(b.title, CONCAT(a.firstName, ' ', a.lastName)) FROM Book b JOIN b.authors a")
-  List<BookPaginationResponse> findAllWithPagination(Pageable pageable);
+  List<BookCustomResponse> findAllWithPagination(Pageable pageable);
 }
