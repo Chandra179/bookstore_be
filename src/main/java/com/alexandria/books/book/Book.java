@@ -1,7 +1,7 @@
 package com.alexandria.books.book;
 
-import com.alexandria.books.book.author.Author;
-import com.alexandria.books.book.genre.Genre;
+import com.alexandria.books.author.Author;
+import com.alexandria.books.genre.Genre;
 import com.alexandria.books.inventory.Inventory;
 import com.alexandria.books.pricing.Pricing;
 import jakarta.persistence.CascadeType;

@@ -1,7 +1,7 @@
 package com.alexandria.books.book;
 
-import com.alexandria.books.book.author.Author;
-import com.alexandria.books.book.genre.Genre;
+import com.alexandria.books.author.Author;
+import com.alexandria.books.genre.Genre;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Builder
-public class BookCompleteResponse {
+public class CompleteBookResponse {
 
   @JsonProperty("title")
   String title;

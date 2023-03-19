@@ -1,4 +1,4 @@
-package com.alexandria.books.book;
+package com.alexandria.books.author;
 
 import lombok.Value;
 

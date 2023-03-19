@@ -1,4 +1,4 @@
-package com.alexandria.books.book.author;
+package com.alexandria.books.author;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;

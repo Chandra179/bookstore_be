@@ -2,12 +2,12 @@ package com.alexandria.books.mock;
 
 import com.alexandria.books.api.BaseApiResponse;
 import com.alexandria.books.book.Book;
-import com.alexandria.books.book.BookCompleteResponse;
+import com.alexandria.books.book.CompleteBookResponse;
 import com.alexandria.books.book.BookRepository;
-import com.alexandria.books.book.author.Author;
-import com.alexandria.books.book.author.AuthorRepository;
-import com.alexandria.books.book.genre.Genre;
-import com.alexandria.books.book.genre.GenreRepository;
+import com.alexandria.books.author.Author;
+import com.alexandria.books.author.AuthorRepository;
+import com.alexandria.books.genre.Genre;
+import com.alexandria.books.genre.GenreRepository;
 import com.alexandria.books.exception.NotFoundException;
 import com.alexandria.books.inventory.Inventory;
 import com.alexandria.books.pricing.Pricing;
@@ -42,7 +42,7 @@ public class MockController {
   @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success get genre")})
   @GetMapping(value = "")
   @Transactional(rollbackOn = Exception.class)
-  public BaseApiResponse<BookCompleteResponse> createBookMockData() {
+  public BaseApiResponse<CompleteBookResponse> createBookMockData() {
     var book = Book.builder().title("Advanture of kora").authors(new HashSet<>())
       .genres(new HashSet<>()).build();
     var author1 = Author.builder().firstName("stanley").lastName("hudson").build();
@@ -71,7 +71,7 @@ public class MockController {
     bookRepository.save(book);
 
     return BaseApiResponse.build(
-      BookCompleteResponse.builder().title(book.getTitle()).authors(authorList).genres(genres)
+      CompleteBookResponse.builder().title(book.getTitle()).authors(authorList).genres(genres)
         .qty(book.getInventory().getQty()).price(book.getPricing().getPrice()).build()
     );
   }

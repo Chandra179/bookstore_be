@@ -1,4 +1,4 @@
-package com.alexandria.books.book.genre;
+package com.alexandria.books.genre;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

@@ -1,7 +1,8 @@
 package com.alexandria.books.book;
 
-import com.alexandria.books.book.genre.Genre;
-import com.alexandria.books.book.genre.GenreRepository;
+import com.alexandria.books.author.AuthorDTO;
+import com.alexandria.books.genre.Genre;
+import com.alexandria.books.genre.GenreRepository;
 import com.alexandria.books.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

@@ -1,7 +1,7 @@
 package com.alexandria.books.book;
 
-import com.alexandria.books.book.author.Author;
-import com.alexandria.books.book.author.AuthorRepository;
+import com.alexandria.books.author.Author;
+import com.alexandria.books.author.AuthorRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

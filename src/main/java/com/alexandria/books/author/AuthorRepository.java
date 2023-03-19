@@ -1,4 +1,4 @@
-package com.alexandria.books.book.author;
+package com.alexandria.books.author;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;

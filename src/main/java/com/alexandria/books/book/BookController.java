@@ -1,6 +1,6 @@
 package com.alexandria.books.book;
 
-import com.alexandria.books.book.genre.Genre;
+import com.alexandria.books.genre.Genre;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

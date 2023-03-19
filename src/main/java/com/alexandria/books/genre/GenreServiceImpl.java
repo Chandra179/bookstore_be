@@ -1,4 +1,4 @@
-package com.alexandria.books.book.genre;
+package com.alexandria.books.genre;
 
 import com.alexandria.books.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

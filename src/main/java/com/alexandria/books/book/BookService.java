@@ -1,6 +1,6 @@
 package com.alexandria.books.book;
 
-import com.alexandria.books.book.genre.Genre;
+import com.alexandria.books.genre.Genre;
 
 import java.util.List;
 
