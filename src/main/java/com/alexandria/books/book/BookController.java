@@ -28,7 +28,7 @@ public class BookController {
       @ApiResponse(responseCode = "404", description = "Book not found")
   })
   @GetMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE})
-  public List<BookCustomResponse> getAllBooks(
+  public List<CustomBookResponse> getAllBooks(
     @RequestParam(defaultValue = "0") int page,
     @RequestParam(defaultValue = "5") int size
   ) {

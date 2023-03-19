@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -24,10 +25,18 @@ public class BookServiceImpl implements BookService {
   }
 
   @Override
-  public List<BookCustomResponse> findAllBooks(int page, int size) {
-    var bookList = bookRepository.findAllWithPagination(PageRequest.of(page, size));
-    if (bookList.isEmpty()) throw new NotFoundException("Book not found");
-    return bookList;
+  public List<CustomBookResponse> findAllBooks(int page, int size) {
+    var books = bookRepository.findAll(PageRequest.of(page, size));
+    if (books.isEmpty()) throw new NotFoundException("Book not found");
+    List<CustomBookResponse> responses = new ArrayList<>();
+    books.forEach(book -> {
+      CustomBookResponse response = new CustomBookResponse(book.getTitle(), new ArrayList<>());
+      book.getAuthors().forEach(
+        author -> response.getAuthors().add(new AuthorDTO(author.getFirstName(), author.getLastName()))
+      );
+      responses.add(response);
+    });
+    return responses;
   }
 
   @Override
