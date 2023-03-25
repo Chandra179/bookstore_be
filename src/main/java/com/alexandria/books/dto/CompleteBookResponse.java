@@ -1,7 +1,7 @@
-package com.alexandria.books.book;
+package com.alexandria.books.dto;
 
-import com.alexandria.books.author.Author;
-import com.alexandria.books.genre.Genre;
+import com.alexandria.books.entity.Author;
+import com.alexandria.books.entity.Genre;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

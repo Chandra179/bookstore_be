@@ -1,6 +1,6 @@
-package com.alexandria.books.pricing;
+package com.alexandria.books.entity;
 
-import com.alexandria.books.book.Book;
+import com.alexandria.books.entity.Book;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

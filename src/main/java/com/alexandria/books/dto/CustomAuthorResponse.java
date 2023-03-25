@@ -1,9 +1,9 @@
-package com.alexandria.books.author;
+package com.alexandria.books.dto;
 
 import lombok.Value;
 
 @Value
-public class AuthorDTO {
+public class CustomAuthorResponse {
   String firstName;
   String lastName;
 }

@@ -1,5 +1,7 @@
 package com.alexandria.books.genre;
 
+import com.alexandria.books.entity.Genre;
+import com.alexandria.books.repository.GenreRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

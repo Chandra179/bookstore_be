@@ -1,4 +1,6 @@
-package com.alexandria.books.genre;
+package com.alexandria.books.service;
+
+import com.alexandria.books.entity.Genre;
 
 import java.util.List;
 

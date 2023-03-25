@@ -1,5 +1,6 @@
-package com.alexandria.books.inventory;
+package com.alexandria.books.repository;
 
+import com.alexandria.books.entity.Pricing;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -7,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface InventoryRepository extends JpaRepository<Inventory, UUID>, CrudRepository<Inventory, UUID> {
+public interface PricingRepository extends JpaRepository<Pricing, UUID>, CrudRepository<Pricing, UUID> {
 
 }

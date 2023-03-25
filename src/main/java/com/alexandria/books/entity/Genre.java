@@ -1,4 +1,4 @@
-package com.alexandria.books.genre;
+package com.alexandria.books.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

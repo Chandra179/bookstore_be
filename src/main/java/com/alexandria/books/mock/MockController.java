@@ -1,16 +1,16 @@
 package com.alexandria.books.mock;
 
 import com.alexandria.books.api.BaseApiResponse;
-import com.alexandria.books.book.Book;
-import com.alexandria.books.book.CompleteBookResponse;
-import com.alexandria.books.book.BookRepository;
-import com.alexandria.books.author.Author;
-import com.alexandria.books.author.AuthorRepository;
-import com.alexandria.books.genre.Genre;
-import com.alexandria.books.genre.GenreRepository;
+import com.alexandria.books.entity.Book;
+import com.alexandria.books.dto.CompleteBookResponse;
+import com.alexandria.books.repository.BookRepository;
+import com.alexandria.books.entity.Author;
+import com.alexandria.books.repository.AuthorRepository;
+import com.alexandria.books.entity.Genre;
+import com.alexandria.books.repository.GenreRepository;
 import com.alexandria.books.exception.NotFoundException;
-import com.alexandria.books.inventory.Inventory;
-import com.alexandria.books.pricing.Pricing;
+import com.alexandria.books.entity.Inventory;
+import com.alexandria.books.entity.Pricing;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

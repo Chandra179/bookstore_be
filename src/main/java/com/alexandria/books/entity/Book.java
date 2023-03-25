@@ -1,9 +1,5 @@
-package com.alexandria.books.book;
+package com.alexandria.books.entity;
 
-import com.alexandria.books.author.Author;
-import com.alexandria.books.genre.Genre;
-import com.alexandria.books.inventory.Inventory;
-import com.alexandria.books.pricing.Pricing;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
