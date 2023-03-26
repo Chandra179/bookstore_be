@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -29,46 +30,47 @@ public class BookServiceImpl implements BookService {
 
   @Override
   public List<CustomBookResponse> findAllBooks(int page, int size) {
-    var books = bookRepository.findAll(PageRequest.of(page, size));
-    if (books.isEmpty()) throw new NotFoundException("Book not found");
-    List<CustomBookResponse> responses = new ArrayList<>();
-    books.forEach(book -> {
+    var booksPage = bookRepository.findAll(PageRequest.of(page, size));
+    var books = booksPage.getContent();
+    if (books.isEmpty()) throw new NotFoundException("No books found");
+    return books.stream().map(book -> {
       CustomBookResponse response = new CustomBookResponse(book.getTitle(), new ArrayList<>());
-      book.getAuthors().forEach(
-        author -> response.getAuthors().add(new CustomAuthorResponse(author.getFirstName(), author.getLastName()))
-      );
-      responses.add(response);
-    });
-    return responses;
+      book.getAuthors().forEach(author -> {
+        response.getAuthors().add(new CustomAuthorResponse(author.getFirstName(), author.getLastName()));
+      });
+      return response;
+    }).collect(Collectors.toList());
   }
 
   @Override
   public List<CustomBookResponse> findBooksByQueryParam(String id, String title, Genre.GENRE genre) {
     List<CustomBookResponse> responses = new ArrayList<>();
-    List<Book> books = new ArrayList<>();
+    List<Book> books;
 
-    if (genre != null) {
-      books = bookRepository.findByTitleContaining(title);
-    }
-    if (!title.isEmpty() && genre != null) {
-      var aGenre = genreRepository.findByName(genre)
-        .orElseThrow(() -> new NotFoundException("Genre not found"));
-      books = bookRepository.findByGenresAndTitleContaining(aGenre, title);
-    }
     if (!id.isEmpty()) {
       books = List.of(bookRepository.findById(UUID.fromString(id))
         .orElseThrow(() -> new NotFoundException("Book not found")));
-    }
-    if (!title.isEmpty()) {
+    } else if (!title.isEmpty() && genre != null) {
+      Genre aGenre = genreRepository.findByName(genre)
+        .orElseThrow(() -> new NotFoundException("Genre not found"));
+      books = bookRepository.findByGenresAndTitleContaining(aGenre, title);
+    } else if (genre != null) {
+      Genre aGenre = genreRepository.findByName(genre)
+        .orElseThrow(() -> new NotFoundException("Genre not found"));
+      books = bookRepository.findByGenres(aGenre);
+    } else if (!title.isEmpty()) {
       books = bookRepository.findByTitleContaining(title);
+    } else {
+      books = new ArrayList<>();
     }
-    books.forEach(book -> {
+
+    for (Book book : books) {
       CustomBookResponse response = new CustomBookResponse(book.getTitle(), new ArrayList<>());
       book.getAuthors().forEach(
         author -> response.getAuthors().add(new CustomAuthorResponse(author.getFirstName(), author.getLastName()))
       );
       responses.add(response);
-    });
+    }
     return responses;
   }
 
