@@ -14,5 +14,4 @@ import java.util.UUID;
 public interface GenreRepository extends JpaRepository<Genre, UUID>, CrudRepository<Genre, UUID> {
 
   Optional<List<Genre>> findByNameIn(Set<Genre.GENRE> genres);
-  Optional<Genre> findByName(Genre.GENRE genres);
 }

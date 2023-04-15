@@ -1,10 +1,11 @@
 package com.alexandria.books.dto;
 
-import lombok.Value;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import java.util.List;
 
-@Value
+@AllArgsConstructor
+@Getter
 public class CustomBookResponse {
   String title;
   List<CustomAuthorResponse> authors;

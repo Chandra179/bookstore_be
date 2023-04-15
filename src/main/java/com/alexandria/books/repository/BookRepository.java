@@ -3,7 +3,9 @@ package com.alexandria.books.repository;
 import com.alexandria.books.entity.Book;
 import com.alexandria.books.entity.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,7 +13,13 @@ import java.util.UUID;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, UUID>, CrudRepository<Book, UUID> {
-  List<Book> findByGenresAndTitleContaining(Genre genre, String title);
+  @Query("SELECT b FROM Book b JOIN b.genres g WHERE g.name = :genreName AND b.title LIKE %:title%")
+  List<Book> findByGenreNameAndTitleContaining(
+    @Param("genreName") Genre.GENRE genreName,
+    @Param("title") String title
+  );
   List<Book> findByTitleContaining(String title);
-  List<Book> findByGenres(Genre genre);
+  @Query("SELECT b FROM Book b JOIN b.genres g WHERE g.name = :genreName")
+  List<Book> findByGenreName(@Param("genreName") Genre.GENRE genreName);
+
 }

@@ -24,8 +24,8 @@ public class GenreController {
 
   @Operation(description = "Genre list")
   @ApiResponses(value = {
-      @ApiResponse(responseCode = "200", description = "Success get all genre"),
-      @ApiResponse(responseCode = "404", description = "Genre not found")
+      @ApiResponse(responseCode = "200", description = "Success"),
+      @ApiResponse(responseCode = "404", description = "Not found")
   })
   @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
   public List<Genre> getAllGenre() {

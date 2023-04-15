@@ -3,7 +3,6 @@ package com.alexandria.books.controller;
 import com.alexandria.books.dto.CustomBookResponse;
 import com.alexandria.books.entity.Genre;
 import com.alexandria.books.service.BookServiceImpl;
-import com.alexandria.books.validator.ValidUUID;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -25,31 +24,30 @@ public class BookController {
   @Autowired
   BookServiceImpl bookService;
 
-  @Operation(description = "Find all books, zero based index")
+  @Operation(description = "Get books per page, zero based index")
   @ApiResponses(value = {
-      @ApiResponse(responseCode = "200", description = "Success get books"),
-      @ApiResponse(responseCode = "404", description = "Book not found")
+      @ApiResponse(responseCode = "200", description = "Success"),
+      @ApiResponse(responseCode = "404", description = "Not found")
   })
-  @GetMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE})
-  public List<CustomBookResponse> findAllBooks(
+  @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
+  public List<CustomBookResponse> getBooksByPage(
     @RequestParam(defaultValue = "0") int page,
     @RequestParam(defaultValue = "5") int size
   ) {
-    return bookService.findAllBooks(page, size);
+    return bookService.findBooksByPage(page, size);
   }
 
-  @Operation(description = "Find books by query param")
+  @Operation(description = "Get books by query param")
   @ApiResponses(value = {
-      @ApiResponse(responseCode = "200", description = "Success get book"),
-      @ApiResponse(responseCode = "404", description = "Book not found")
+      @ApiResponse(responseCode = "200", description = "Success"),
+      @ApiResponse(responseCode = "404", description = "Not found")
   })
-  @GetMapping(value = "")
-  public List<CustomBookResponse> findBooksByQueryParam(
-    @ValidUUID @RequestParam(value = "book_id", defaultValue = "") String id,
-    @RequestParam(value = "book_title", defaultValue = "") String title,
+  @GetMapping(value = "/search", produces = {MediaType.APPLICATION_JSON_VALUE})
+  public List<CustomBookResponse> getBooksByRequestParam(
+    @RequestParam(value = "title", defaultValue = "") String title,
     @RequestParam(value = "genre", defaultValue = "") Genre.GENRE genre
   ) {
-    return bookService.findBooksByQueryParam(id, title, genre);
+    return bookService.findBooksByRequestParam(title, genre);
   }
 
 }

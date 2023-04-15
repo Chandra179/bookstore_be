@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BookService {
 
-  List<CustomBookResponse> findAllBooks(int page, int size);
+  List<CustomBookResponse> findBooksByPage(int page, int size);
 
-  List<CustomBookResponse> findBooksByQueryParam(String id, String title, Genre.GENRE genres);
+  List<CustomBookResponse> findBooksByRequestParam(String title, Genre.GENRE genre);
 }

@@ -3,7 +3,6 @@ package com.alexandria.books.service;
 import com.alexandria.books.entity.Genre;
 import com.alexandria.books.exception.NotFoundException;
 import com.alexandria.books.repository.GenreRepository;
-import com.alexandria.books.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;

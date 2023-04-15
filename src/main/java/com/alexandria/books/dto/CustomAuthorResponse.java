@@ -1,8 +1,10 @@
 package com.alexandria.books.dto;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Value
+@AllArgsConstructor
+@Getter
 public class CustomAuthorResponse {
   String firstName;
   String lastName;

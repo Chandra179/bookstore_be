@@ -19,6 +19,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
@@ -43,9 +44,11 @@ public class MockController {
   @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success get genre")})
   @GetMapping(value = "")
   @Transactional(rollbackOn = Exception.class)
-  public BaseApiResponse<CompleteBookResponse> createBookMockData() {
-    var book = Book.builder().title("Adventure of Kora").authors(new HashSet<>())
-      .genres(new HashSet<>()).build();
+  public BaseApiResponse<CompleteBookResponse> createBookMockData(
+    @RequestParam(value = "title", defaultValue = "") String title,
+    @RequestParam(value = "authors", defaultValue = "") Genre.GENRE genre
+  ) {
+    var book = Book.builder().title(title).authors(new HashSet<>()).genres(new HashSet<>()).build();
     var authorList = Set.of(
       Author.builder().firstName("Stanley").lastName("Hudson").build(),
       Author.builder().firstName("Dwight").lastName("Schrute").build(),
