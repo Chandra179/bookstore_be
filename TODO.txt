@@ -24,6 +24,16 @@ flow
                -> if item in cache less than current item stock
                -> than cannot proceed to buy, user must be update item qty
                -> than when we submit the order this step should be occured
-                  -> reserved the item, not decrease item in warehouse (or maybe not???)
-                     then, after payment succeed release the reserve items, than decrease the item in warehouse
+                  -> reserved the item, not decrease the item in warehouse (or maybe not???)
+                     then after payment succeed, release the reserve items, than decrease the item in warehouse
+                     the pros of this approach is that the item is reserved before the payment
+                     so items will be decreased when user click the "submit-order-button" (order process)
+                     not when user click "pay" (payment process)
+                     the cons is that, if the user is not pay the items ASAP, the items will remain out of stock
+                     and still reserved (need to adjust limit time to pay, like 15/30 minutes)
+                  -> if not then, if multiple user by the same item, and the item is out of stock and there
+                     are still some user in "payment-loading-success (already complete payment)" BUT... the item is OUT OF STOCK
+                     then we need to REFUND the user payment, need to integrate payment <-> warehouse
+                     like we need to track complete order by date, case: 5th user success buy, but 6th user also success
+                     but the stock is empty then we need to proceed to REFUND
                buy now -> same as above, the difference is we not store the items in cache
