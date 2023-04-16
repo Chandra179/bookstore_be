@@ -1,10 +1,29 @@
 SECURITY JWT (EMAIL, PW) accesstoken 7 days until refresh token implemented
-Best seller books
-Best seller books by Genre
-books/product tag
-    - new, best seller, discount, no need to store it in database
-    - we determine the tag by checking like upload date, order count, etc.
-search
-    - book title
-    - genre & book
+books product tag
+- new, best seller, discount, no need to store it in database
+  we determine the tag by checking like upload date, order count, etc.
 inventory
+flow
+ - homepage
+     a. list of genre A-Z        -> see all -> /alexandria/documentary
+     b. new release              -> see all -> /alexandria/new-release
+     c. best seller of all genre -> see all -> /alexandria/best-seller
+     d. best seller per genre    -> see all -> /alexandria/fiction/best-seller
+     e. upcoming books ->        -> see all -> /alexandria/upcoming-books
+ - search by
+     a. title & genre -> /alexandria/fiction/the-alchemist
+ - book detail
+     a. show : book_image
+               title
+               book_stock (10 items left)
+               -(30)+  Set inventory thresholds min/max items user can add item, so the product is not oversold
+                       maybe limit the number of product by weight? like max items weight is 50kg
+                       determine by seller or delivery vendor, ex: vendor only allowed max 100kg for each delivery
+     b. click: -> add to cart -> store items in cache -> buy now
+               -> check current item in cache and compare it with current item stock
+               -> if item in cache less than current item stock
+               -> than cannot proceed to buy, user must be update item qty
+               -> than when we submit the order this step should be occured
+                  -> reserved the item, not decrease item in warehouse (or maybe not???)
+                     then, after payment succeed release the reserve items, than decrease the item in warehouse
+               buy now -> same as above, the difference is we not store the items in cache
