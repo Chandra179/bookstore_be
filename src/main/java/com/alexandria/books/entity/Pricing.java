@@ -1,6 +1,5 @@
 package com.alexandria.books.entity;
 
-import com.alexandria.books.entity.Book;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

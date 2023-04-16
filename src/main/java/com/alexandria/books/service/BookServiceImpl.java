@@ -63,7 +63,7 @@ public class BookServiceImpl implements BookService {
     } else if (!title.isEmpty()) {
       books = bookRepository.findByTitleContaining(title);
     } else {
-      books = new ArrayList<>();
+      throw new NotFoundException("Book not found");
     }
     return books.stream().map(book -> {
       CustomBookResponse response = new CustomBookResponse(book.getTitle(), new ArrayList<>());
@@ -80,7 +80,7 @@ public class BookServiceImpl implements BookService {
       .title(request.getTitle())
       .authors(new HashSet<>())
       .genres(new HashSet<>()).build();
-    Set<Author> newAuthors = request.getAuthors().stream()
+    Set<Author> authors = request.getAuthors().stream()
       .map(author -> {
         String firstName = author.getFirstName().toLowerCase();
         String lastName = author.getLastName().toLowerCase();
@@ -89,13 +89,11 @@ public class BookServiceImpl implements BookService {
       })
       .collect(Collectors.toSet());
 
-    authorRepository.saveAll(newAuthors);
-    Genre.GENRE.
+    authorRepository.saveAll(authors);
     var genres = new HashSet<>(genreRepository.findByNameIn(request.getGenre())
       .orElseThrow(() -> new NotFoundException("Genre not found")));
     book.setGenres(genres);
-
-    book.getAuthors().addAll(newAuthors);
+    book.getAuthors().addAll(authors);
     book.setInventory(Inventory.builder().book(book).qty(request.getQty()).build());
     book.setPricing(Pricing.builder().book(book).price(request.getPrice()).build());
     bookRepository.save(book);
