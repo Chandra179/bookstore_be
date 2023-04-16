@@ -17,7 +17,7 @@ public class ApiExceptionHandler {
 
   @ExceptionHandler(InvalidFormatException.class)
   public ResponseEntity<ApiErrorResponse> handleNotFoundException(InvalidFormatException  ex) {
-    ApiErrorResponse error = new ApiErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+    ApiErrorResponse error = new ApiErrorResponse(HttpStatus.BAD_REQUEST, "Invalid format");
     return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
   }
 }

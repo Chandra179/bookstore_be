@@ -13,6 +13,8 @@ public class CreateBookRequest {
   String title;
   List<CreateAuthorRequest> authors;
   Set<Genre.GENRE> genre;
+  // min 0, max ?
   BigInteger qty;
+  // min 0, max ?,
   BigDecimal price;
 }

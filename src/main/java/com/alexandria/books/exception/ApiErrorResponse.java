@@ -8,13 +8,13 @@ import org.springframework.http.HttpStatus;
 @Setter
 public class ApiErrorResponse {
 
-  private HttpStatus errorCode;
+  private HttpStatus code;
 
-  private String errorMessage;
+  private String message;
 
-  public ApiErrorResponse(HttpStatus errorCode, String errorMessage) {
-    this.errorCode = errorCode;
-    this.errorMessage = errorMessage;
+  public ApiErrorResponse(HttpStatus code, String message) {
+    this.code = code;
+    this.message = message;
   }
 
 }
