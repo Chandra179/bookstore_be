@@ -1,17 +1,17 @@
 package com.alexandria.books.service;
 
+import com.alexandria.books.entity.Inventory;
+import com.alexandria.books.repository.AuthorRepository;
+import com.alexandria.books.repository.BookRepository;
+import com.alexandria.books.repository.GenreRepository;
 import com.alexandria.books.dto.CreateBookRequest;
 import com.alexandria.books.dto.AuthorResponse;
 import com.alexandria.books.dto.BookResponse;
 import com.alexandria.books.entity.Author;
 import com.alexandria.books.entity.Book;
 import com.alexandria.books.entity.Genre;
-import com.alexandria.books.entity.Inventory;
 import com.alexandria.books.entity.Pricing;
 import com.alexandria.books.exception.NotFoundException;
-import com.alexandria.books.repository.AuthorRepository;
-import com.alexandria.books.repository.BookRepository;
-import com.alexandria.books.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;

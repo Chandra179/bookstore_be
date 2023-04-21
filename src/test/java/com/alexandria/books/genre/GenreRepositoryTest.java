@@ -2,6 +2,7 @@ package com.alexandria.books.genre;
 
 import com.alexandria.books.entity.Genre;
 import com.alexandria.books.repository.GenreRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -23,7 +24,7 @@ public class GenreRepositoryTest {
   void getAllGenre() {
     var genres = genreRepository.findAll();
     assertFalse(genres.isEmpty());
-    genres.forEach((x) -> assertEquals(x.getName(), Genre.GENRE.valueOf(x.getName().name())));
+    genres.forEach((x) -> Assertions.assertEquals(x.getName(), Genre.GENRE.valueOf(x.getName().name())));
   }
 
 }

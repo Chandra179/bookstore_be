@@ -18,6 +18,21 @@ flow
      to add another item and stock is empty, the buy button for that item will be disabled,
      of course maybe in frontend will need to automatically
      refresh the page to update the display of item qty.
+     - If the Redis cache is out of memory due to a large number of users saving items to their carts,
+       you have a few options to resolve the issue:
+       1. Increase the memory allocated to Redis: Depending on the server capacity
+          you can allocate more memory to Redis to accommodate more data in the cache.
+          This can be done by modifying the Redis configuration file or by using a cloud-based Redis service
+          that allows you to scale up the memory allocation as needed.
+       2. Implement cache eviction policies: You can configure Redis to evict older or less frequently used data
+          from the cache when it reaches a certain size limit. Redis provides several eviction policies,
+          such as Least Recently Used (LRU) or Least Frequently Used (LFU), which can be configured based on your application's needs.
+       3. Use a distributed cache solution: A distributed cache solution such as Hazelcast or Apache Ignite can help
+          to distribute the cache across multiple servers, allowing for a larger cache size and more efficient use of resources.
+          This can be especially useful for larger applications with high levels of traffic.
+       4. Use a combination of caching and database storage: You can use caching to store frequently accessed data,
+          such as cart items, and use a database to store less frequently accessed data. This approach can help to reduce
+          the memory footprint of the cache and ensure that data is always available when needed.
  - book detail
      a. show : book_image
                title

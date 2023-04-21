@@ -4,6 +4,7 @@ import com.alexandria.books.entity.Author;
 import com.alexandria.books.entity.Book;
 import com.alexandria.books.repository.AuthorRepository;
 import com.alexandria.books.repository.BookRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -32,7 +33,7 @@ public class BookRepositoryTest {
     var savedBook = bookRepository.save(Book.builder().title("title1").build());
     var book = bookRepository.findById(savedBook.getId()).orElse(null);
     assertNotNull(book);
-    assertEquals(savedBook.getTitle(), book.getTitle());
+    Assertions.assertEquals(savedBook.getTitle(), book.getTitle());
   }
 
   @Test
@@ -48,8 +49,8 @@ public class BookRepositoryTest {
 
     assertNotNull(author);
     assertNotNull(book);
-    assertEquals(savedAuthor.getId(), author.getId());
-    assertEquals(savedBook.getId(), book.getId());
+    Assertions.assertEquals(savedAuthor.getId(), author.getId());
+    Assertions.assertEquals(savedBook.getId(), book.getId());
   }
 
   @Test
@@ -66,7 +67,7 @@ public class BookRepositoryTest {
     savedBook.setTitle("title2");
     var book = bookRepository.findById(savedBook.getId()).orElse(null);
     assertNotNull(book);
-    assertEquals(savedBook.getId(), book.getId());
-    assertEquals(savedBook.getTitle(), book.getTitle());
+    Assertions.assertEquals(savedBook.getId(), book.getId());
+    Assertions.assertEquals(savedBook.getTitle(), book.getTitle());
   }
 }
