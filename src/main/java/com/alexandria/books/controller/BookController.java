@@ -1,7 +1,7 @@
 package com.alexandria.books.controller;
 
 import com.alexandria.books.dto.CreateBookRequest;
-import com.alexandria.books.dto.CustomBookResponse;
+import com.alexandria.books.dto.BookResponse;
 import com.alexandria.books.entity.Genre;
 import com.alexandria.books.service.BookServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,7 +34,7 @@ public class BookController {
       @ApiResponse(responseCode = "404", description = "Not found")
   })
   @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
-  public List<CustomBookResponse> getBooksByPage(
+  public List<BookResponse> getBooksByPage(
     @RequestParam(defaultValue = "0") int page,
     @RequestParam(defaultValue = "5") int size
   ) {
@@ -47,7 +47,7 @@ public class BookController {
       @ApiResponse(responseCode = "404", description = "Not found")
   })
   @GetMapping(value = "/search", produces = {MediaType.APPLICATION_JSON_VALUE})
-  public List<CustomBookResponse> getBooksByRequestParam(
+  public List<BookResponse> getBooksByRequestParam(
     @RequestParam(value = "title", defaultValue = "") String title,
     @RequestParam(value = "genre", defaultValue = "") Genre.GENRE genre
   ) {

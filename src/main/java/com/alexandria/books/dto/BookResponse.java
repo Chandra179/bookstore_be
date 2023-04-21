@@ -6,7 +6,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Getter
-public class CustomBookResponse {
+public class BookResponse {
   String title;
-  List<CustomAuthorResponse> authors;
+  List<AuthorResponse> authors;
 }

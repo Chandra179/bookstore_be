@@ -1,8 +1,8 @@
 package com.alexandria.books.service;
 
 import com.alexandria.books.dto.CreateBookRequest;
-import com.alexandria.books.dto.CustomAuthorResponse;
-import com.alexandria.books.dto.CustomBookResponse;
+import com.alexandria.books.dto.AuthorResponse;
+import com.alexandria.books.dto.BookResponse;
 import com.alexandria.books.entity.Author;
 import com.alexandria.books.entity.Book;
 import com.alexandria.books.entity.Genre;
@@ -40,21 +40,21 @@ public class BookServiceImpl implements BookService {
   }
 
   @Override
-  public List<CustomBookResponse> findBooksByPage(int page, int size) {
+  public List<BookResponse> findBooksByPage(int page, int size) {
     var booksPage = bookRepository.findAll(PageRequest.of(page, size));
     var books = booksPage.getContent();
     if (books.isEmpty()) throw new NotFoundException("No books found");
     return books.stream().map(book -> {
-      CustomBookResponse response = new CustomBookResponse(book.getTitle(), new ArrayList<>());
+      BookResponse response = new BookResponse(book.getTitle(), new ArrayList<>());
       book.getAuthors().forEach(author -> {
-        response.getAuthors().add(new CustomAuthorResponse(author.getFirstName(), author.getLastName()));
+        response.getAuthors().add(new AuthorResponse(author.getFirstName(), author.getLastName()));
       });
       return response;
     }).collect(Collectors.toList());
   }
 
   @Override
-  public List<CustomBookResponse> findBooksByRequestParam(String title, Genre.GENRE genre) {
+  public List<BookResponse> findBooksByRequestParam(String title, Genre.GENRE genre) {
     List<Book> books;
     if (!title.isEmpty() && genre != null) {
       books = bookRepository.findByGenreNameAndTitleContaining(genre, title);
@@ -66,9 +66,9 @@ public class BookServiceImpl implements BookService {
       throw new NotFoundException("Book not found");
     }
     return books.stream().map(book -> {
-      CustomBookResponse response = new CustomBookResponse(book.getTitle(), new ArrayList<>());
+      BookResponse response = new BookResponse(book.getTitle(), new ArrayList<>());
       book.getAuthors().forEach(
-        author -> response.getAuthors().add(new CustomAuthorResponse(author.getFirstName(), author.getLastName()))
+        author -> response.getAuthors().add(new AuthorResponse(author.getFirstName(), author.getLastName()))
       );
       return response;
     }).collect(Collectors.toList());

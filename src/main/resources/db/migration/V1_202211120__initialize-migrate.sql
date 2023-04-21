@@ -1,7 +1,7 @@
 CREATE TABLE genre
 (
     id         SERIAL PRIMARY KEY,
-    name       VARCHAR(255) UNIQUE
+    name       VARCHAR(255) UNIQUE NOT NULL
 );
 INSERT INTO genre (name) VALUES ('BIOGRAPHY');
 INSERT INTO genre (name) VALUES ('FICTION');
@@ -10,7 +10,7 @@ INSERT INTO genre (name) VALUES ('SELF_HELP');
 CREATE TABLE book
 (
     id          UUID PRIMARY KEY,
-    title       VARCHAR(255)
+    title       VARCHAR(255) NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_book_title ON book (title);
 

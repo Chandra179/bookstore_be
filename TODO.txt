@@ -12,6 +12,12 @@ flow
      e. upcoming books ->        -> see all -> /alexandria/upcoming-books
  - search by
      a. title & genre -> /alexandria/fiction/the-alchemist
+ - cart
+     what if like i use cache to store user cart item,
+     and to keep sync with item in database, i will get the items stock/qty, so whenever user want
+     to add another item and stock is empty, the buy button for that item will be disabled,
+     of course maybe in frontend will need to automatically
+     refresh the page to update the display of item qty.
  - book detail
      a. show : book_image
                title

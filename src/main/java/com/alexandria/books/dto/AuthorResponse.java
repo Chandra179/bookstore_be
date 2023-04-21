@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class CustomAuthorResponse {
+public class AuthorResponse {
   String firstName;
   String lastName;
 }
