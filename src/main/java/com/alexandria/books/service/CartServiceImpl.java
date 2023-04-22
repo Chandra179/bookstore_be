@@ -1,18 +1,31 @@
 package com.alexandria.books.service;
 
-public class CartServiceImpl implements CartService{
-  @Override
-  public void getItem() {
+import com.alexandria.books.repository.KeyValueRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
+public class CartServiceImpl implements CartService {
+
+  KeyValueRepository KeyValueRepository;
+
+  @Autowired
+  public CartServiceImpl(RedisRepositoryImpl redisRepositoryImpl) {
+    this.KeyValueRepository = redisRepositoryImpl;
   }
 
   @Override
-  public void saveItem() {
-
+  public Object getItem(String key) {
+    return KeyValueRepository.get(key);
   }
 
   @Override
-  public void deleteItem() {
+  public void saveItem(String key, Object value) {
+    KeyValueRepository.save(key, value);
+  }
 
+  @Override
+  public void deleteItem(String key) {
+    KeyValueRepository.delete(key);
   }
 }

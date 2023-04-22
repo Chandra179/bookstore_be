@@ -33,7 +33,7 @@ public class BookController {
       @ApiResponse(responseCode = "200", description = "Success"),
       @ApiResponse(responseCode = "404", description = "Not found")
   })
-  @GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
+  @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
   public List<BookResponse> getBooksByPage(
     @RequestParam(defaultValue = "0") int page,
     @RequestParam(defaultValue = "5") int size
@@ -56,7 +56,7 @@ public class BookController {
 
   @Operation(description = "Create book")
   @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success")})
-  @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE})
+  @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
   @Transactional(rollbackOn = Exception.class)
   public void createBook(@RequestBody CreateBookRequest request) {
     bookService.createBook(request);
