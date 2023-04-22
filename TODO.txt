@@ -16,8 +16,7 @@ flow
      what if like i use cache to store user cart item,
      and to keep sync with item in database, i will get the items stock/qty, so whenever user want
      to add another item and stock is empty, the buy button for that item will be disabled,
-     of course maybe in frontend will need to automatically
-     refresh the page to update the display of item qty.
+     of course maybe in frontend will need to automatically refresh the page to update the display of item qty.
      - If the Redis cache is out of memory due to a large number of users saving items to their carts,
        you have a few options to resolve the issue:
        1. Increase the memory allocated to Redis: Depending on the server capacity
@@ -58,3 +57,6 @@ flow
                      like we need to track complete order by date, case: 5th user success buy, but 6th user also success
                      but the stock is empty then we need to proceed to REFUND
                buy now -> same as above, the difference is we not store the items in cache
+     c. align cartId with itemId
+        - if null create else update item: save(key:itemId, value: qty)
+        -
