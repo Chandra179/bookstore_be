@@ -1,5 +1,6 @@
 package com.alexandria.books.service;
 
+import com.alexandria.books.exception.NotFoundException;
 import com.alexandria.books.repository.KeyValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class CartServiceImpl implements CartService {
 
   @Override
   public Integer getItem(String key) {
+    if (KeyValueRepository.get(key) == null) {
+      throw new NotFoundException("Item not found");
+    }
     return (Integer) KeyValueRepository.get(key);
   }
 
