@@ -1,5 +1,6 @@
 package com.alexandria.books.controller;
 
+import com.alexandria.books.api.BaseApiResponse;
 import com.alexandria.books.service.CartServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -43,8 +44,8 @@ public class CartController {
     @ApiResponse(responseCode = "404", description = "Not found")
   })
   @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
-  public Integer getItem(@RequestParam("id") @Pattern(regexp=UUID_PATTERN) String id) {
-    return cartService.getItem(id);
+  public BaseApiResponse<Integer> getItem(@RequestParam("id") @Pattern(regexp=UUID_PATTERN) String id) {
+    return BaseApiResponse.build(cartService.getItem(id));
   }
 
   @Operation(description = "Delete cart item")

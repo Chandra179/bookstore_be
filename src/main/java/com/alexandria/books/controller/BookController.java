@@ -1,5 +1,6 @@
 package com.alexandria.books.controller;
 
+import com.alexandria.books.api.BaseApiResponse;
 import com.alexandria.books.service.BookServiceImpl;
 import com.alexandria.books.dto.CreateBookRequest;
 import com.alexandria.books.dto.BookResponse;
@@ -34,11 +35,11 @@ public class BookController {
       @ApiResponse(responseCode = "404", description = "Not found")
   })
   @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
-  public List<BookResponse> getBooksByPage(
+  public BaseApiResponse<List<BookResponse>> getBooksByPage(
     @RequestParam(defaultValue = "0") int page,
     @RequestParam(defaultValue = "5") int size
   ) {
-    return bookService.findBooksByPage(page, size);
+    return BaseApiResponse.build(bookService.findBooksByPage(page, size));
   }
 
   @Operation(description = "Get books by query param")
@@ -47,11 +48,11 @@ public class BookController {
       @ApiResponse(responseCode = "404", description = "Not found")
   })
   @GetMapping(value = "/search", produces = {MediaType.APPLICATION_JSON_VALUE})
-  public List<BookResponse> getBooksByRequestParam(
+  public BaseApiResponse<List<BookResponse>> getBooksByRequestParam(
     @RequestParam(value = "title", defaultValue = "") String title,
     @RequestParam(value = "genre", defaultValue = "") Genre.GENRE genre
   ) {
-    return bookService.findBooksByRequestParam(title, genre);
+    return BaseApiResponse.build(bookService.findBooksByRequestParam(title, genre));
   }
 
   @Operation(description = "Create book")

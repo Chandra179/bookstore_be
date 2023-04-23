@@ -1,5 +1,6 @@
 package com.alexandria.books.controller;
 
+import com.alexandria.books.api.BaseApiResponse;
 import com.alexandria.books.entity.Genre;
 import com.alexandria.books.service.GenreServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,8 +29,8 @@ public class GenreController {
       @ApiResponse(responseCode = "404", description = "Not found")
   })
   @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
-  public List<Genre> getAllGenre() {
-    return genreService.getAllGenre();
+  public BaseApiResponse<List<Genre>> getAllGenre() {
+    return BaseApiResponse.build(genreService.getAllGenre());
   }
 
 }
