@@ -15,8 +15,8 @@ public class CartServiceImpl implements CartService {
   }
 
   @Override
-  public Object getItem(String key) {
-    return KeyValueRepository.get(key);
+  public Integer getItem(String key) {
+    return (Integer) KeyValueRepository.get(key);
   }
 
   @Override

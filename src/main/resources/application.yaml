@@ -13,6 +13,8 @@ spring:
     password: ${SPRING_DATASOURCE_PASSWORD}
   flyway:
     validateOnMigrate: false
+  messages:
+    basename: messages
 
 logging:
   level:
