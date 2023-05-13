@@ -83,7 +83,7 @@ public class BookServiceImpl implements BookService {
         String firstName = author.getFirstName().toLowerCase();
         String lastName = author.getLastName().toLowerCase();
         Optional<Author> existingAuthor = authorRepository.findByFirstNameAndLastName(firstName, lastName);
-        return existingAuthor.orElse(Author.builder().firstName(firstName).lastName(lastName).build());
+        return existingAuthor.orElse(new Author(firstName, lastName));
       })
       .collect(Collectors.toSet());
 

@@ -34,4 +34,9 @@ public class Author {
   @Column
   private String lastName;
 
+  public Author(String firstName, String lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
 }
