@@ -42,4 +42,8 @@ public class Pricing implements Serializable {
   @JoinColumn(name = "book_id")
   private Book book;
 
+  public Pricing(Book book, BigDecimal price) {
+    this.book = book;
+    this.price = price;
+  }
 }

@@ -42,4 +42,8 @@ public class Inventory implements Serializable {
   @JoinColumn(name = "book_id")
   private Book book;
 
+  public Inventory(Book book, BigInteger qty) {
+    this.book = book;
+    this.qty = qty;
+  }
 }

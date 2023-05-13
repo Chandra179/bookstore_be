@@ -3,9 +3,6 @@ CREATE TABLE genre
     id         SERIAL PRIMARY KEY,
     name       VARCHAR(255) UNIQUE NOT NULL
 );
-INSERT INTO genre (name) VALUES ('BIOGRAPHY');
-INSERT INTO genre (name) VALUES ('FICTION');
-INSERT INTO genre (name) VALUES ('SELF_HELP');
 
 CREATE TABLE book
 (

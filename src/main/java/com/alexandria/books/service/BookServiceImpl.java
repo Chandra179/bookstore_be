@@ -1,23 +1,21 @@
 package com.alexandria.books.service;
 
-import com.alexandria.books.entity.Inventory;
-import com.alexandria.books.repository.AuthorRepository;
-import com.alexandria.books.repository.BookRepository;
-import com.alexandria.books.repository.GenreRepository;
-import com.alexandria.books.dto.CreateBookRequest;
 import com.alexandria.books.dto.AuthorResponse;
 import com.alexandria.books.dto.BookResponse;
+import com.alexandria.books.dto.CreateBookRequest;
 import com.alexandria.books.entity.Author;
 import com.alexandria.books.entity.Book;
 import com.alexandria.books.entity.Genre;
+import com.alexandria.books.entity.Inventory;
 import com.alexandria.books.entity.Pricing;
 import com.alexandria.books.exception.NotFoundException;
+import com.alexandria.books.repository.AuthorRepository;
+import com.alexandria.books.repository.BookRepository;
+import com.alexandria.books.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -41,16 +39,17 @@ public class BookServiceImpl implements BookService {
 
   @Override
   public List<BookResponse> findBooksByPage(int page, int size) {
-    var booksPage = bookRepository.findAll(PageRequest.of(page, size));
-    var books = booksPage.getContent();
-    if (books.isEmpty()) throw new NotFoundException("No books found");
-    return books.stream().map(book -> {
-      BookResponse response = new BookResponse(book.getTitle(), new ArrayList<>());
-      book.getAuthors().forEach(author -> {
-        response.getAuthors().add(new AuthorResponse(author.getFirstName(), author.getLastName()));
-      });
-      return response;
-    }).collect(Collectors.toList());
+    List<BookResponse> bookResponses = bookRepository.findAll(PageRequest.of(page, size))
+      .getContent()
+      .stream()
+      .map(book -> new BookResponse(
+        book.getTitle(),
+        book.getAuthors().stream()
+          .map(author -> new AuthorResponse(author.getFirstName(), author.getLastName()))
+          .collect(Collectors.toList())))
+      .collect(Collectors.toList());
+    if (bookResponses.isEmpty()) throw new NotFoundException("No books found");
+    return bookResponses;
   }
 
   @Override
@@ -65,21 +64,20 @@ public class BookServiceImpl implements BookService {
     } else {
       throw new NotFoundException("Book not found");
     }
-    return books.stream().map(book -> {
-      BookResponse response = new BookResponse(book.getTitle(), new ArrayList<>());
-      book.getAuthors().forEach(
-        author -> response.getAuthors().add(new AuthorResponse(author.getFirstName(), author.getLastName()))
-      );
-      return response;
-    }).collect(Collectors.toList());
+    return books.stream()
+      .map(book -> new BookResponse(
+        book.getTitle(),
+        book.getAuthors().stream()
+          .map(author -> new AuthorResponse(author.getFirstName(), author.getLastName()))
+          .collect(Collectors.toList())))
+      .collect(Collectors.toList());
   }
 
   @Override
   public void createBook(CreateBookRequest request) {
-    var book = Book.builder()
-      .title(request.getTitle())
-      .authors(new HashSet<>())
-      .genres(new HashSet<>()).build();
+    var book = new Book();
+    book.setTitle(request.getTitle());
+
     Set<Author> authors = request.getAuthors().stream()
       .map(author -> {
         String firstName = author.getFirstName().toLowerCase();
@@ -90,12 +88,15 @@ public class BookServiceImpl implements BookService {
       .collect(Collectors.toSet());
 
     authorRepository.saveAll(authors);
-    var genres = new HashSet<>(genreRepository.findByNameIn(request.getGenre())
-      .orElseThrow(() -> new NotFoundException("Genre not found")));
+
+    var genres = genreRepository.findByNameIn(request.getGenre())
+      .orElseThrow(() -> new NotFoundException("Genre not found"));
+
     book.setGenres(genres);
-    book.getAuthors().addAll(authors);
-    book.setInventory(Inventory.builder().book(book).qty(request.getQty()).build());
-    book.setPricing(Pricing.builder().book(book).price(request.getPrice()).build());
+    book.setAuthors(authors);
+    book.setInventory(new Inventory(book, request.getQty()));
+    book.setPricing(new Pricing(book, request.getPrice()));
+
     bookRepository.save(book);
   }
 

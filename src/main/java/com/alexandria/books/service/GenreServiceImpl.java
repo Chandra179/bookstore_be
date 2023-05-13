@@ -24,6 +24,6 @@ public class GenreServiceImpl implements GenreService {
     Sort sort = Sort.by(Sort.Direction.ASC, "name");
     var genres = genreRepository.findAll(sort).stream().toList();
     if (genres.isEmpty()) throw new NotFoundException("Genre not found");
-    return genreRepository.findAll(sort).stream().toList();
+    return genres;
   }
 }
