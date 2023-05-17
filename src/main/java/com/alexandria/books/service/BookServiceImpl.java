@@ -1,13 +1,12 @@
 package com.alexandria.books.service;
 
+import com.alexandria.books.builder.BookBuilder;
 import com.alexandria.books.dto.AuthorResponse;
 import com.alexandria.books.dto.BookResponse;
 import com.alexandria.books.dto.CreateBookRequest;
 import com.alexandria.books.entity.Author;
 import com.alexandria.books.entity.Book;
 import com.alexandria.books.entity.Genre;
-import com.alexandria.books.entity.Inventory;
-import com.alexandria.books.entity.Pricing;
 import com.alexandria.books.exception.NotFoundException;
 import com.alexandria.books.repository.AuthorRepository;
 import com.alexandria.books.repository.BookRepository;
@@ -48,7 +47,7 @@ public class BookServiceImpl implements BookService {
           .map(author -> new AuthorResponse(author.getFirstName(), author.getLastName()))
           .collect(Collectors.toList())))
       .collect(Collectors.toList());
-    if (bookResponses.isEmpty()) throw new NotFoundException("No books found");
+    if (bookResponses.isEmpty()) throw new NotFoundException("Books not found");
     return bookResponses;
   }
 
@@ -62,7 +61,7 @@ public class BookServiceImpl implements BookService {
     } else if (!title.isEmpty()) {
       books = bookRepository.findByTitleContaining(title);
     } else {
-      throw new NotFoundException("Book not found");
+      throw new UnsupportedOperationException();
     }
     return books.stream()
       .map(book -> new BookResponse(
@@ -75,9 +74,6 @@ public class BookServiceImpl implements BookService {
 
   @Override
   public void createBook(CreateBookRequest request) {
-    var book = new Book();
-    book.setTitle(request.getTitle());
-
     Set<Author> authors = request.getAuthors().stream()
       .map(author -> {
         String firstName = author.getFirstName().toLowerCase();
@@ -92,10 +88,13 @@ public class BookServiceImpl implements BookService {
     var genres = genreRepository.findByNameIn(request.getGenre())
       .orElseThrow(() -> new NotFoundException("Genre not found"));
 
-    book.setGenres(genres);
-    book.setAuthors(authors);
-    book.setInventory(new Inventory(book, request.getQty()));
-    book.setPricing(new Pricing(book, request.getPrice()));
+    Book book = new BookBuilder()
+      .setTitle(request.getTitle())
+      .setGenres(genres)
+      .setAuthors(authors)
+      .setQty(request.getQty())
+      .setPrice(request.getPrice())
+      .build();
 
     bookRepository.save(book);
   }
