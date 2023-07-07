@@ -1,6 +1,6 @@
 package com.alexandria.books.controller;
 
-import com.alexandria.books.api.BaseApiResponse;
+import com.alexandria.books.dto.apiresponse.BaseApiResponse;
 import com.alexandria.books.entity.Genre;
 import com.alexandria.books.service.GenreServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,4 +1,4 @@
-package com.alexandria.books.api;
+package com.alexandria.books.dto.apiresponse;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

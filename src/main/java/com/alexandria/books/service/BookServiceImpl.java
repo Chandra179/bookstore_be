@@ -1,9 +1,9 @@
 package com.alexandria.books.service;
 
 import com.alexandria.books.builder.BookBuilder;
-import com.alexandria.books.dto.AuthorResponse;
-import com.alexandria.books.dto.BookResponse;
-import com.alexandria.books.dto.CreateBookRequest;
+import com.alexandria.books.dto.apiresponse.BookApiResponse;
+import com.alexandria.books.dto.apirequest.BookApiRequest;
+import com.alexandria.books.dto.AuthorDto;
 import com.alexandria.books.entity.Author;
 import com.alexandria.books.entity.Book;
 import com.alexandria.books.entity.Genre;
@@ -39,14 +39,14 @@ public class BookServiceImpl implements BookService {
   }
 
   @Override
-  public List<BookResponse> findBooksByPage(int page, int size) {
-    List<BookResponse> bookResponses = bookRepository.findAll(PageRequest.of(page, size))
+  public List<BookApiResponse> findBooksByPage(int page, int size) {
+    List<BookApiResponse> bookResponses = bookRepository.findAll(PageRequest.of(page, size))
       .getContent()
       .stream()
-      .map(book -> new BookResponse(
+      .map(book -> new BookApiResponse(
         book.getTitle(),
         book.getAuthors().stream()
-          .map(author -> new AuthorResponse(author.getFirstName(), author.getLastName()))
+          .map(author -> new AuthorDto(author.getFirstName(), author.getLastName()))
           .collect(Collectors.toList())))
       .collect(Collectors.toList());
     if (bookResponses.isEmpty()) throw new NotFoundException("Books not found");
@@ -54,7 +54,7 @@ public class BookServiceImpl implements BookService {
   }
 
   @Override
-  public List<BookResponse> findBooksByRequestParam(String title, Genre.GENRE genre) {
+  public List<BookApiResponse> findBooksByRequestParam(String title, Genre.GENRE genre) {
     List<Book> books;
     // TODO: use strategy pattern if the conditional checking become more complex
     if (!title.isEmpty() && genre != null) {
@@ -67,18 +67,18 @@ public class BookServiceImpl implements BookService {
       throw new UnsupportedOperationException();
     }
     return books.stream()
-      .map(book -> new BookResponse(
+      .map(book -> new BookApiResponse(
         book.getTitle(),
         book.getAuthors().stream()
-          .map(author -> new AuthorResponse(author.getFirstName(), author.getLastName()))
+          .map(author -> new AuthorDto(author.getFirstName(), author.getLastName()))
           .collect(Collectors.toList())))
       .collect(Collectors.toList());
   }
 
   @Override
-  public void createBook(CreateBookRequest request) {
-    Set<Author> newAuthors = new HashSet<>();
-    Set<Author> authors = request.getAuthors().stream()
+  public void createBook(BookApiRequest request) {
+    Set<com.alexandria.books.entity.Author> newAuthors = new HashSet<>();
+    Set<com.alexandria.books.entity.Author> authors = request.getAuthors().stream()
       .map(author -> {
         String firstName = author.getFirstName().toLowerCase();
         String lastName = author.getLastName().toLowerCase();

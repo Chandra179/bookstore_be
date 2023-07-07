@@ -1,9 +1,9 @@
 package com.alexandria.books.controller;
 
-import com.alexandria.books.api.BaseApiResponse;
+import com.alexandria.books.dto.apiresponse.BaseApiResponse;
 import com.alexandria.books.service.BookServiceImpl;
-import com.alexandria.books.dto.CreateBookRequest;
-import com.alexandria.books.dto.BookResponse;
+import com.alexandria.books.dto.apirequest.BookApiRequest;
+import com.alexandria.books.dto.apiresponse.BookApiResponse;
 import com.alexandria.books.entity.Genre;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -35,7 +35,7 @@ public class BookController {
       @ApiResponse(responseCode = "404", description = "Not found")
   })
   @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
-  public BaseApiResponse<List<BookResponse>> getBooksByPage(
+  public BaseApiResponse<List<BookApiResponse>> getBooksByPage(
     @RequestParam(defaultValue = "0") int page,
     @RequestParam(defaultValue = "5") int size
   ) {
@@ -48,7 +48,7 @@ public class BookController {
       @ApiResponse(responseCode = "404", description = "Not found")
   })
   @GetMapping(value = "/search", produces = {MediaType.APPLICATION_JSON_VALUE})
-  public BaseApiResponse<List<BookResponse>> getBooksByRequestParam(
+  public BaseApiResponse<List<BookApiResponse>> getBooksByRequestParam(
     @RequestParam(value = "title", defaultValue = "") String title,
     @RequestParam(value = "genre", defaultValue = "") Genre.GENRE genre
   ) {
@@ -59,7 +59,7 @@ public class BookController {
   @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Success")})
   @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
   @Transactional(rollbackOn = Exception.class)
-  public void createBook(@RequestBody CreateBookRequest request) {
+  public void createBook(@RequestBody BookApiRequest request) {
     bookService.createBook(request);
   }
 

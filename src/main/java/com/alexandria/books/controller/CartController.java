@@ -1,6 +1,6 @@
 package com.alexandria.books.controller;
 
-import com.alexandria.books.api.BaseApiResponse;
+import com.alexandria.books.dto.apiresponse.BaseApiResponse;
 import com.alexandria.books.service.CartServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
