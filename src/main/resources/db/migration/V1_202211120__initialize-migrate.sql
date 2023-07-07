@@ -22,26 +22,26 @@ CREATE INDEX IF NOT EXISTS idx_author_firstname_lastname ON author (first_name, 
 
 CREATE TABLE book_author
 (
-    book_id   UUID REFERENCES book(id),
-    author_id UUID REFERENCES author(id),
+    fk_book   UUID REFERENCES book(id),
+    fk_author UUID REFERENCES author(id),
     PRIMARY KEY (book_id, author_id)
 );
 
 CREATE TABLE book_genre
 (
-    book_id   UUID REFERENCES book(id),
-    genre_id  SERIAL REFERENCES genre(id),
+    fk_book   UUID REFERENCES book(id),
+    fk_genre  SERIAL REFERENCES genre(id),
     PRIMARY KEY (book_id, genre_id)
 );
 
 CREATE TABLE inventory
 (
-    book_id     UUID NOT NULL REFERENCES book (id),
+    fk_book     UUID NOT NULL REFERENCES book (id),
     qty         BIGINT NOT NULL
 );
 
 CREATE TABLE pricing
 (
-    book_id     UUID NOT NULL REFERENCES book (id),
+    fk_book     UUID NOT NULL REFERENCES book (id),
     price       NUMERIC(15, 2) NOT NULL
 );

@@ -3,7 +3,6 @@ package com.alexandria.books.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -31,19 +30,22 @@ public class Inventory implements Serializable {
   private static final long serialVersionUID = 1;
 
   @Id
-  @Column(name = "book_id")
-  private UUID bookId;
+  @Column(name = "fk_book")
+  private UUID id;
 
   @Column
   private BigInteger qty;
 
   @OneToOne
   @MapsId
-  @JoinColumn(name = "book_id")
   private Book book;
 
   public Inventory(Book book, BigInteger qty) {
     this.book = book;
+    this.qty = qty;
+  }
+
+  public Inventory(BigInteger qty) {
     this.qty = qty;
   }
 }

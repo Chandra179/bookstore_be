@@ -7,6 +7,8 @@ import com.alexandria.books.dto.CreateBookRequest;
 import com.alexandria.books.entity.Author;
 import com.alexandria.books.entity.Book;
 import com.alexandria.books.entity.Genre;
+import com.alexandria.books.entity.Inventory;
+import com.alexandria.books.entity.Pricing;
 import com.alexandria.books.exception.NotFoundException;
 import com.alexandria.books.repository.AuthorRepository;
 import com.alexandria.books.repository.BookRepository;
@@ -15,8 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -54,6 +56,7 @@ public class BookServiceImpl implements BookService {
   @Override
   public List<BookResponse> findBooksByRequestParam(String title, Genre.GENRE genre) {
     List<Book> books;
+    // TODO: use strategy pattern if the conditional checking become more complex
     if (!title.isEmpty() && genre != null) {
       books = bookRepository.findByGenreNameAndTitleContaining(genre, title);
     } else if (genre != null) {
@@ -74,26 +77,32 @@ public class BookServiceImpl implements BookService {
 
   @Override
   public void createBook(CreateBookRequest request) {
+    Set<Author> newAuthors = new HashSet<>();
     Set<Author> authors = request.getAuthors().stream()
       .map(author -> {
         String firstName = author.getFirstName().toLowerCase();
         String lastName = author.getLastName().toLowerCase();
-        Optional<Author> existingAuthor = authorRepository.findByFirstNameAndLastName(firstName, lastName);
-        return existingAuthor.orElse(new Author(firstName, lastName));
+        return authorRepository
+          .findByFirstNameAndLastName(firstName, lastName)
+          .orElseGet(() -> {
+            Author createdAuthor = new Author(firstName, lastName);
+            newAuthors.add(createdAuthor);
+            return createdAuthor;
+          });
       })
       .collect(Collectors.toSet());
 
-    authorRepository.saveAll(authors);
+    authorRepository.saveAll(newAuthors);
 
     var genres = genreRepository.findByNameIn(request.getGenre())
       .orElseThrow(() -> new NotFoundException("Genre not found"));
 
     Book book = new BookBuilder()
-      .setTitle(request.getTitle())
-      .setGenres(genres)
-      .setAuthors(authors)
-      .setQty(request.getQty())
-      .setPrice(request.getPrice())
+      .title(request.getTitle())
+      .genres(genres)
+      .authors(authors)
+      .inventory(new Inventory(request.getQty()))
+      .pricing(new Pricing(request.getPrice()))
       .build();
 
     bookRepository.save(book);

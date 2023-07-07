@@ -6,8 +6,6 @@ import com.alexandria.books.entity.Genre;
 import com.alexandria.books.entity.Inventory;
 import com.alexandria.books.entity.Pricing;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,8 +13,8 @@ public class BookBuilder {
   private final Book book;
   private final Set<Author> authors;
   private final Set<Genre> genres;
-  private BigInteger qty;
-  private BigDecimal price;
+  private Inventory inventory;
+  private Pricing pricing;
 
   public BookBuilder() {
     book = new Book();
@@ -24,36 +22,38 @@ public class BookBuilder {
     genres = new HashSet<>();
   }
 
-  public BookBuilder setTitle(String title) {
+  public BookBuilder title(String title) {
     book.setTitle(title);
     return this;
   }
 
-  public BookBuilder setAuthors(Set<Author> authorsReq) {
+  public BookBuilder authors(Set<Author> authorsReq) {
     authors.addAll(authorsReq);
     return this;
   }
 
-  public BookBuilder setGenres(Set<Genre> genres) {
+  public BookBuilder genres(Set<Genre> genres) {
     book.setGenres(genres);
     return this;
   }
 
-  public BookBuilder setQty(BigInteger qty) {
-     this.qty = qty;
-     return this;
+  public BookBuilder inventory(Inventory inventory) {
+    inventory.setBook(book);
+    this.inventory = inventory;
+    return this;
   }
 
-  public BookBuilder setPrice(BigDecimal price) {
-    this.price = price;
+  public BookBuilder pricing(Pricing pricing) {
+    pricing.setBook(book);
+    this.pricing = pricing;
     return this;
   }
 
   public Book build() {
     book.setAuthors(authors);
     book.setGenres(genres);
-    book.setInventory(new Inventory(book, qty));
-    book.setPricing(new Pricing(book, price));
+    book.setInventory(inventory);
+    book.setPricing(pricing);
     return book;
   }
 }

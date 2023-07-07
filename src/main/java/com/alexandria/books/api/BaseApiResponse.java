@@ -9,7 +9,7 @@ public class BaseApiResponse<T> {
   }
 
   @JsonProperty("data")
-  private T data;
+  private final T data;
 
   public BaseApiResponse(T data) {
     this.data = data;

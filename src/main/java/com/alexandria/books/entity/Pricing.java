@@ -3,7 +3,6 @@ package com.alexandria.books.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -31,19 +30,22 @@ public class Pricing implements Serializable {
   private static final long serialVersionUID = 1;
 
   @Id
-  @Column(name = "book_id")
-  private UUID bookId;
+  @Column(name = "fk_book")
+  private UUID id;
 
   @Column
   private BigDecimal price;
 
   @OneToOne
   @MapsId
-  @JoinColumn(name = "book_id")
   private Book book;
 
   public Pricing(Book book, BigDecimal price) {
     this.book = book;
+    this.price = price;
+  }
+
+  public Pricing(BigDecimal price) {
     this.price = price;
   }
 }

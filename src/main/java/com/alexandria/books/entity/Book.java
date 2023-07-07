@@ -58,5 +58,4 @@ public class Book {
   @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
   @PrimaryKeyJoinColumn
   private Pricing pricing;
-
 }
