@@ -1,7 +1,7 @@
-package com.alexandria.books.application.service.impl;
+package com.alexandria.books.domain.service.impl;
 
 import com.alexandria.books.domain.model.entity.Genre;
-import com.alexandria.books.application.service.GenreService;
+import com.alexandria.books.domain.service.GenreService;
 import com.alexandria.books.exception.NotFoundException;
 import com.alexandria.books.domain.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;

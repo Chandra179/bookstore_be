@@ -1,4 +1,4 @@
-package com.alexandria.books.application.service;
+package com.alexandria.books.domain.service;
 
 import com.alexandria.books.domain.model.entity.Genre;
 

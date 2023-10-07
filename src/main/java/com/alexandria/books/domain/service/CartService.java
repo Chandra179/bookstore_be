@@ -1,4 +1,4 @@
-package com.alexandria.books.application.service;
+package com.alexandria.books.domain.service;
 
 public interface CartService {
   Integer getItem(String key);

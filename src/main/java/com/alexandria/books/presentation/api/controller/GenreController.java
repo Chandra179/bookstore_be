@@ -2,7 +2,7 @@ package com.alexandria.books.presentation.api.controller;
 
 import com.alexandria.books.dto.BaseApiResponse;
 import com.alexandria.books.domain.model.entity.Genre;
-import com.alexandria.books.application.service.impl.GenreServiceImpl;
+import com.alexandria.books.domain.service.impl.GenreServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

@@ -1,4 +1,4 @@
-package com.alexandria.books.application.service;
+package com.alexandria.books.domain.service;
 
 import com.alexandria.books.dto.BookApiRequest;
 import com.alexandria.books.dto.BookApiResponse;
