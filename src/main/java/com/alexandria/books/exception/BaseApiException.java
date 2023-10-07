@@ -1,6 +1,8 @@
 package com.alexandria.books.exception;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.web.server.ResponseStatusException;
 
 @JsonIgnoreProperties(
   value = {
@@ -14,9 +16,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
     "rawStatusCode",
   }
 )
-public class BaseApiException extends RuntimeException {
+public class BaseApiException extends ResponseStatusException {
 
-  public BaseApiException(String message) {
-    super(message);
+  public BaseApiException(HttpStatusCode status, String reason) {
+    super(status, reason);
+  }
+  public BaseApiException(HttpStatusCode status) {
+    super(status);
   }
 }
