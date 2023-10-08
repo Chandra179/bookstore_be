@@ -1,0 +1,13 @@
+============
+PGADMIN
+============
+docker pull dpage/pgadmin4
+
+docker run -p 5050:80 --name pgadmin-container -e PGADMIN_DEFAULT_EMAIL=123@gmail.com -e PGADMIN_DEFAULT_PASSWORD=123 -d dpage/pgadmin4
+
+pg admin web -> http://localhost:5050
+
+register server
+1. (Host name/address) is using IPAddress from docker image
+2. docker ps
+3. docker inspect {container_id}

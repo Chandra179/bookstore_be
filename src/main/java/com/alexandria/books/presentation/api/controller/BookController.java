@@ -1,7 +1,7 @@
 package com.alexandria.books.presentation.api.controller;
 
 import com.alexandria.books.dto.BaseApiResponse;
-import com.alexandria.books.domain.service.impl.BookServiceImpl;
+import com.alexandria.books.application.service.impl.BookServiceImpl;
 import com.alexandria.books.dto.BookApiRequest;
 import com.alexandria.books.dto.BookApiResponse;
 import com.alexandria.books.domain.model.entity.Genre;

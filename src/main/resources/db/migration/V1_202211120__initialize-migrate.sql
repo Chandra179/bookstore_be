@@ -24,14 +24,14 @@ CREATE TABLE book_author
 (
     fk_book   UUID REFERENCES book(id),
     fk_author UUID REFERENCES author(id),
-    PRIMARY KEY (book_id, author_id)
+    PRIMARY KEY (fk_book, fk_author)
 );
 
 CREATE TABLE book_genre
 (
     fk_book   UUID REFERENCES book(id),
     fk_genre  SERIAL REFERENCES genre(id),
-    PRIMARY KEY (book_id, genre_id)
+    PRIMARY KEY (fk_book, fk_genre)
 );
 
 CREATE TABLE inventory

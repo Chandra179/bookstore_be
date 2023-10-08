@@ -12,8 +12,8 @@ public class ApiExceptionHandler {
 
   @ExceptionHandler(NotFoundException.class)
   public ResponseEntity<ApiErrorResponse> handleNotFoundException(NotFoundException ex) {
-    ApiErrorResponse error = new ApiErrorResponse(ex.getErrorCode(), ex.getMessage());
-    return new ResponseEntity<>(error, ex.getErrorCode());
+    ApiErrorResponse error = new ApiErrorResponse(ex.getStatusCode(), ex.getMessage());
+    return new ResponseEntity<>(error, ex.getStatusCode());
   }
 
   @ExceptionHandler(InvalidFormatException.class)

@@ -1,7 +1,7 @@
-package com.alexandria.books.domain.service.impl;
+package com.alexandria.books.application.service.impl;
 
 import com.alexandria.books.application.factories.BookBuilder;
-import com.alexandria.books.domain.service.BookService;
+import com.alexandria.books.application.service.BookService;
 import com.alexandria.books.dto.BookApiResponse;
 import com.alexandria.books.dto.BookApiRequest;
 import com.alexandria.books.dto.AuthorDto;

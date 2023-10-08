@@ -21,7 +21,6 @@ import java.util.UUID;
 @Getter
 @Builder
 @Setter
-@JsonIgnoreProperties("books")
 public class Author {
 
   @Id

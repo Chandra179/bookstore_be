@@ -1,4 +1,4 @@
-package com.alexandria.books.domain.service.impl;
+package com.alexandria.books.application.service.impl;
 
 import com.alexandria.books.domain.repository.KeyValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;

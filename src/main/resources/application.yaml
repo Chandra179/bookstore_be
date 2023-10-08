@@ -7,10 +7,10 @@ springdoc:
 
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
+    url: jdbc:postgresql://localhost/alexandria
     driverClassName: org.postgresql.Driver
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    username: postgres
+    password: postgres
   flyway:
     validateOnMigrate: false
   messages:
