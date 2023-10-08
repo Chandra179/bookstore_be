@@ -15,6 +15,9 @@ spring:
     validateOnMigrate: false
   messages:
     basename: messages
+  jpa:
+    hibernate:
+      ddl-auto: update
 
 logging:
   level:

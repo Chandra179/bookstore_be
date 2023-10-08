@@ -4,7 +4,7 @@ import com.alexandria.books.domain.model.entity.Author;
 import com.alexandria.books.domain.model.entity.Book;
 import com.alexandria.books.domain.model.entity.Genre;
 import com.alexandria.books.domain.model.entity.Inventory;
-import com.alexandria.books.domain.model.entity.Pricing;
+import com.alexandria.books.domain.model.valueobjects.Price;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +14,7 @@ public class BookBuilder {
   private final Set<Author> authors;
   private final Set<Genre> genres;
   private Inventory inventory;
-  private Pricing pricing;
+  private Price price;
 
   public BookBuilder() {
     book = new Book();
@@ -43,9 +43,8 @@ public class BookBuilder {
     return this;
   }
 
-  public BookBuilder pricing(Pricing pricing) {
-    pricing.setBook(book);
-    this.pricing = pricing;
+  public BookBuilder pricing(Price price) {
+    this.price = price;
     return this;
   }
 
@@ -53,7 +52,7 @@ public class BookBuilder {
     book.setAuthors(authors);
     book.setGenres(genres);
     book.setInventory(inventory);
-    book.setPricing(pricing);
+    book.setPrice(price);
     return book;
   }
 }

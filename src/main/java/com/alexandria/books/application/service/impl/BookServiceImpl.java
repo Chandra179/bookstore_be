@@ -9,7 +9,7 @@ import com.alexandria.books.domain.model.entity.Author;
 import com.alexandria.books.domain.model.entity.Book;
 import com.alexandria.books.domain.model.entity.Genre;
 import com.alexandria.books.domain.model.entity.Inventory;
-import com.alexandria.books.domain.model.entity.Pricing;
+import com.alexandria.books.domain.model.valueobjects.Price;
 import com.alexandria.books.exception.NotFoundException;
 import com.alexandria.books.domain.repository.AuthorRepository;
 import com.alexandria.books.domain.repository.BookRepository;
@@ -101,7 +101,7 @@ public class BookServiceImpl implements BookService {
       .genres(genres)
       .authors(authors)
       .inventory(new Inventory(request.getQty()))
-      .pricing(new Pricing(request.getPrice()))
+      .pricing(new Price(request.getPrice()))
       .build();
 
     bookRepository.save(book);

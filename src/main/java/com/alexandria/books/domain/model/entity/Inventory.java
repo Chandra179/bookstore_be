@@ -1,11 +1,6 @@
 package com.alexandria.books.domain.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,7 +25,7 @@ public class Inventory implements Serializable {
   private static final long serialVersionUID = 1;
 
   @Id
-  @Column(name = "fk_book")
+  @GeneratedValue
   private UUID id;
 
   @Column
@@ -39,11 +34,6 @@ public class Inventory implements Serializable {
   @OneToOne
   @MapsId
   private Book book;
-
-  public Inventory(Book book, BigInteger qty) {
-    this.book = book;
-    this.qty = qty;
-  }
 
   public Inventory(BigInteger qty) {
     this.qty = qty;

@@ -4,13 +4,6 @@ CREATE TABLE genre
     name       VARCHAR(255) UNIQUE NOT NULL
 );
 
-CREATE TABLE book
-(
-    id          UUID PRIMARY KEY,
-    title       VARCHAR(255) NOT NULL
-);
-CREATE INDEX IF NOT EXISTS idx_book_title ON book (title);
-
 CREATE TABLE author
 (
     id          UUID PRIMARY KEY,
@@ -19,6 +12,14 @@ CREATE TABLE author
 );
 CREATE INDEX IF NOT EXISTS idx_author_id ON author (id);
 CREATE INDEX IF NOT EXISTS idx_author_firstname_lastname ON author (first_name, last_name);
+
+CREATE TABLE book
+(
+    id          UUID PRIMARY KEY,
+    title       VARCHAR(255) NOT NULL,
+    amount       BIGINT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_book_title ON book(title);
 
 CREATE TABLE book_author
 (
@@ -36,12 +37,7 @@ CREATE TABLE book_genre
 
 CREATE TABLE inventory
 (
-    fk_book     UUID NOT NULL REFERENCES book (id),
+    id          UUID PRIMARY KEY,
+    fk_book     UUID NOT NULL REFERENCES book(id),
     qty         BIGINT NOT NULL
-);
-
-CREATE TABLE pricing
-(
-    fk_book     UUID NOT NULL REFERENCES book (id),
-    price       NUMERIC(15, 2) NOT NULL
 );
