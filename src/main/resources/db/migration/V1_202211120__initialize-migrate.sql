@@ -17,27 +17,27 @@ CREATE TABLE book
 (
     id          UUID PRIMARY KEY,
     title       VARCHAR(255) NOT NULL,
-    amount       BIGINT NOT NULL
+    amount      BIGINT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_book_title ON book(title);
 
 CREATE TABLE book_author
 (
-    fk_book   UUID REFERENCES book(id),
-    fk_author UUID REFERENCES author(id),
-    PRIMARY KEY (fk_book, fk_author)
+    book_id   UUID REFERENCES book(id),
+    author_id UUID REFERENCES author(id),
+    PRIMARY KEY (book_id, author_id)
 );
 
 CREATE TABLE book_genre
 (
-    fk_book   UUID REFERENCES book(id),
-    fk_genre  SERIAL REFERENCES genre(id),
-    PRIMARY KEY (fk_book, fk_genre)
+    book_id   UUID REFERENCES book(id),
+    genre_id  SERIAL REFERENCES genre(id),
+    PRIMARY KEY (book_id, genre_id)
 );
 
 CREATE TABLE inventory
 (
     id          UUID PRIMARY KEY,
-    fk_book     UUID NOT NULL REFERENCES book(id),
-    qty         BIGINT NOT NULL
+    qty         BIGINT NOT NULL,
+    book_id     UUID REFERENCES book(id) NOT NULL
 );

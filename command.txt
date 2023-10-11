@@ -8,6 +8,6 @@ docker run -p 5050:80 --name pgadmin-container -e PGADMIN_DEFAULT_EMAIL=123@gmai
 pg admin web -> http://localhost:5050
 
 register server
-1. (Host name/address) is using IPAddress from docker image
+1. (Host name/address) is using Gateway from docker image
 2. docker ps
 3. docker inspect {container_id}

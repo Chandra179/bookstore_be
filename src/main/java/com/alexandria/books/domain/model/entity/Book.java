@@ -30,19 +30,16 @@ public class Book {
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
     name = "book_genre",
-    joinColumns = @JoinColumn(name = "fk_book"),
-    inverseJoinColumns = @JoinColumn(name = "fk_genre"))
+    joinColumns = @JoinColumn(name = "book_id"),
+    inverseJoinColumns = @JoinColumn(name = "genre_id"))
   Set<Genre> genres;
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
     name = "book_author",
-    joinColumns = @JoinColumn(name = "fk_book"),
-    inverseJoinColumns = @JoinColumn(name = "fk_author"))
+    joinColumns = @JoinColumn(name = "book_id"),
+    inverseJoinColumns = @JoinColumn(name = "author_id"))
   Set<Author> authors;
-
-  @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
-  private Inventory inventory;
 
   @Embedded
   private Price price;

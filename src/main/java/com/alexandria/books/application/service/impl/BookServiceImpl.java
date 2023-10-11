@@ -2,13 +2,14 @@ package com.alexandria.books.application.service.impl;
 
 import com.alexandria.books.application.factories.BookBuilder;
 import com.alexandria.books.application.service.BookService;
+import com.alexandria.books.domain.model.entity.Inventory;
+import com.alexandria.books.domain.repository.InventoryRepository;
 import com.alexandria.books.dto.BookApiResponse;
 import com.alexandria.books.dto.BookApiRequest;
 import com.alexandria.books.dto.AuthorDto;
 import com.alexandria.books.domain.model.entity.Author;
 import com.alexandria.books.domain.model.entity.Book;
 import com.alexandria.books.domain.model.entity.Genre;
-import com.alexandria.books.domain.model.entity.Inventory;
 import com.alexandria.books.domain.model.valueobjects.Price;
 import com.alexandria.books.exception.NotFoundException;
 import com.alexandria.books.domain.repository.AuthorRepository;
@@ -28,14 +29,17 @@ public class BookServiceImpl implements BookService {
   private final BookRepository bookRepository;
   private final GenreRepository genreRepository;
   private final AuthorRepository authorRepository;
+  private final InventoryRepository inventoryRepository;
 
   @Autowired
   public BookServiceImpl(
-    BookRepository bookRepository, GenreRepository genreRepository, AuthorRepository authorRepository
+    BookRepository bookRepository, GenreRepository genreRepository, AuthorRepository authorRepository,
+    InventoryRepository inventoryRepository
   ) {
     this.bookRepository = bookRepository;
     this.genreRepository = genreRepository;
     this.authorRepository = authorRepository;
+    this.inventoryRepository = inventoryRepository;
   }
 
   @Override
@@ -100,11 +104,11 @@ public class BookServiceImpl implements BookService {
       .title(request.getTitle())
       .genres(genres)
       .authors(authors)
-      .inventory(new Inventory(request.getQty()))
-      .pricing(new Price(request.getPrice()))
+      .price(new Price(request.getPrice()))
       .build();
 
-    bookRepository.save(book);
+    book = bookRepository.save(book);
+    inventoryRepository.save(new Inventory(request.getQty(), book));
   }
 
 }

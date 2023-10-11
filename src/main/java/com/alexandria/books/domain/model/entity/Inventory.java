@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.UUID;
 
@@ -19,10 +17,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @Setter
-public class Inventory implements Serializable {
-
-  @Serial
-  private static final long serialVersionUID = 1;
+public class Inventory {
 
   @Id
   @GeneratedValue
@@ -32,10 +27,11 @@ public class Inventory implements Serializable {
   private BigInteger qty;
 
   @OneToOne
-  @MapsId
+  @JoinColumn(name = "book_id")
   private Book book;
 
-  public Inventory(BigInteger qty) {
+  public Inventory(BigInteger qty, Book book) {
+    this.book = book;
     this.qty = qty;
   }
 }

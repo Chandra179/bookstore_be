@@ -13,7 +13,6 @@ public class BookBuilder {
   private final Book book;
   private final Set<Author> authors;
   private final Set<Genre> genres;
-  private Inventory inventory;
   private Price price;
 
   public BookBuilder() {
@@ -37,13 +36,7 @@ public class BookBuilder {
     return this;
   }
 
-  public BookBuilder inventory(Inventory inventory) {
-    inventory.setBook(book);
-    this.inventory = inventory;
-    return this;
-  }
-
-  public BookBuilder pricing(Price price) {
+  public BookBuilder price(Price price) {
     this.price = price;
     return this;
   }
@@ -51,7 +44,6 @@ public class BookBuilder {
   public Book build() {
     book.setAuthors(authors);
     book.setGenres(genres);
-    book.setInventory(inventory);
     book.setPrice(price);
     return book;
   }
