@@ -1,9 +1,9 @@
 package com.alexandria.books.book;
 
-import com.alexandria.books.domain.model.entity.Author;
-import com.alexandria.books.domain.model.entity.Book;
-import com.alexandria.books.domain.repository.AuthorRepository;
-import com.alexandria.books.domain.repository.BookRepository;
+import com.alexandria.books.model.Author;
+import com.alexandria.books.model.Book;
+import com.alexandria.books.repository.AuthorRepository;
+import com.alexandria.books.repository.BookRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

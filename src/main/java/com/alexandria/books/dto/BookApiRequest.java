@@ -1,6 +1,6 @@
 package com.alexandria.books.dto;
 
-import com.alexandria.books.domain.model.entity.Genre;
+import com.alexandria.books.model.Genre;
 import lombok.Getter;
 
 import java.math.BigDecimal;
