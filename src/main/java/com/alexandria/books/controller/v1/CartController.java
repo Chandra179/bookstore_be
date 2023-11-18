@@ -1,4 +1,4 @@
-package com.alexandria.books.controller;
+package com.alexandria.books.controller.v1;
 
 import com.alexandria.books.dto.BaseApiResponse;
 import com.alexandria.books.service.impl.CartServiceImpl;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.alexandria.books.constants.RegexPattern.UUID_PATTERN;
 
 @Tag(name = "Cart")
-@RequestMapping("/cart")
+@RequestMapping("/v1/cart")
 @Validated
 @RestController
 public class CartController {

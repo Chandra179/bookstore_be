@@ -1,4 +1,4 @@
-package com.alexandria.books.controller;
+package com.alexandria.books.controller.v1;
 
 import com.alexandria.books.dto.BaseApiResponse;
 import com.alexandria.books.model.Genre;

@@ -1,4 +1,4 @@
-package com.alexandria.books.controller;
+package com.alexandria.books.controller.v1;
 
 import com.alexandria.books.dto.BaseApiResponse;
 import com.alexandria.books.service.impl.BookServiceImpl;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @Tag(name = "Book")
-@RequestMapping("/books")
+@RequestMapping("/v1/books")
 @RestController
 public class BookController {
 

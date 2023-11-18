@@ -17,13 +17,13 @@ public class ApiExceptionHandler {
   }
 
   @ExceptionHandler(InvalidFormatException.class)
-  public ResponseEntity<ApiErrorResponse> handleInvalidFormatException(InvalidFormatException  ex) {
+  public ResponseEntity<ApiErrorResponse> handleInvalidFormatException(InvalidFormatException ex) {
     ApiErrorResponse error = new ApiErrorResponse(HttpStatus.BAD_REQUEST, "Invalid format");
     return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
   }
 
   @ExceptionHandler(ConstraintDefinitionException.class)
-  public ResponseEntity<ApiErrorResponse> handleConstraintException(ConstraintDefinitionException  ex) {
+  public ResponseEntity<ApiErrorResponse> handleConstraintException(ConstraintDefinitionException ex) {
     ApiErrorResponse error = new ApiErrorResponse(
       HttpStatus.BAD_REQUEST, "The input does not meet the required format constraints"
     );

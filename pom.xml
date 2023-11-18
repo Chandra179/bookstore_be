@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.4</version>
+		<version>3.1.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.alexandria.books</groupId>
@@ -20,7 +20,6 @@
 		<javax.xml.bind.version>2.3.0</javax.xml.bind.version>
 		<springdoc-openapi.version>2.0.0</springdoc-openapi.version>
 		<sonar.organization>chandra179</sonar.organization>
-		<jacoco.version>0.8.7</jacoco.version>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
@@ -95,7 +94,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
-			<version>3.0.5</version>
 		</dependency>
 	</dependencies>
 
@@ -104,7 +102,6 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco.version}</version>
 				<executions>
 					<execution>
 						<id>jacoco-initialize</id>

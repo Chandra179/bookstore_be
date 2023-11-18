@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -61,9 +62,9 @@ public class BookServiceImpl implements BookService {
   public List<BookApiResponse> findBooks(String title, Genre.GENRE genre) {
     List<Book> books;
     // TODO: use strategy pattern if the conditional checking become more complex
-    if (!title.isEmpty() && genre != null) {
+    if (!title.isEmpty() && Objects.nonNull(genre)) {
       books = bookRepository.findByGenreNameAndTitleContaining(genre, title);
-    } else if (genre != null) {
+    } else if (Objects.nonNull(genre)) {
       books = bookRepository.findByGenreName(genre);
     } else if (!title.isEmpty()) {
       books = bookRepository.findByTitleContaining(title);
@@ -81,6 +82,7 @@ public class BookServiceImpl implements BookService {
 
   @Override
   public void createBook(BookApiRequest request) {
+    // Need to prevent duplicate input for new authors
     Set<Author> newAuthors = new HashSet<>();
     Set<Author> authors = request.getAuthors().stream()
       .map(author -> {

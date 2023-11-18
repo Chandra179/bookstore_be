@@ -17,7 +17,6 @@ import org.springframework.web.server.ResponseStatusException;
   }
 )
 public class BaseApiException extends ResponseStatusException {
-
   public BaseApiException(HttpStatusCode status, String reason) {
     super(status, reason);
   }

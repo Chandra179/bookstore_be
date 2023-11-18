@@ -6,6 +6,8 @@ import com.alexandria.books.repository.KeyValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class CartServiceImpl implements CartService {
 
@@ -18,10 +20,11 @@ public class CartServiceImpl implements CartService {
 
   @Override
   public Integer getItem(String key) {
-    if (KeyValueRepository.get(key) == null) {
+    var value = KeyValueRepository.get(key);
+    if (Objects.isNull(value)) {
       throw new NotFoundException("Item not found");
     }
-    return (Integer) KeyValueRepository.get(key);
+    return (Integer) value;
   }
 
   @Override
